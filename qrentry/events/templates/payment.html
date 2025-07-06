@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment - {{ event.title }}{% endblock %}
+
+{% block content %}
+<h2>Payment for "{{ event.title }}"</h2>
+
+<p>This is a placeholder payment page.</p>
+<form method="POST" action="">
+    {% csrf_token %}
+    <button type="submit" class="btn">Pay Now</button>
+</form>
+{% endblock %}

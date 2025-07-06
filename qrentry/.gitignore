@@ -1,0 +1,19 @@
+# Python & Django
+*.pyc
+__pycache__/
+db.sqlite3
+*.sqlite3
+.env
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Django media/static if stored locally
+/media
+/staticfiles
+
+
+myenv/

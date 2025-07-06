@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment Success - {{ event.title }}{% endblock %}
+
+{% block content %}
+<h2>Thank you for your payment!</h2>
+<p>Your booking for "{{ event.title }}" is confirmed. Your booking ID: {{ booking_id }}</p>
+
+<h3>Your Ticket QR Code:</h3>
+<img src="data:image/png;base64,{{ qr_code_base64 }}" alt="QR Code" style="width:250px; height:250px;" />
+
+<a href="{% url 'home' %}">Back to Home</a>
+{% endblock %}

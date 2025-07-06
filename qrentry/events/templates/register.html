@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %}Register | QREntry{% endblock %}
+
+{% block content %}
+<style>
+  .register-wrapper {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px);
+    border-radius: 24px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    margin: 2rem auto;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    text-align: center;
+  }
+
+  .register-icon {
+    font-size: 2.4rem;
+    background: #f4f4f4;
+    padding: 12px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+
+  .register-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .register-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+
+  .register-wrapper form input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background: #f9f9f9;
+    font-size: 0.95rem;
+  }
+
+  .register-button {
+    width: 100%;
+    background: black;
+    color: white;
+    padding: 0.9rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+
+  .login-link {
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .login-link a {
+    color: #007bff;
+    text-decoration: none;
+  }
+</style>
+
+<div class="register-wrapper">
+  <div class="register-icon">📝</div>
+  <div class="register-title">Create an Account</div>
+  <div class="register-subtitle">
+    Join QREntry to manage events and attendance<br />
+    with ease and security.
+  </div>
+
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <div style="text-align: left; margin-bottom: 1rem;">
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.errors %}
+          <div style="color: red; font-size: 0.85rem;">{{ field.errors|striptags }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button type="submit" class="register-button">Register</button>
+  </form>
+
+  <div class="login-link">
+    Already have an account? <a href="{% url 'login' %}">Login here</a>
+  </div>
+</div>
+{% endblock %}

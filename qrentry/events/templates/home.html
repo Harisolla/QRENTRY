@@ -1,0 +1,23 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - QREntry{% endblock %}
+
+{% block content %}
+<h2 style="text-align: center;">Upcoming Events</h2>
+
+<div class="event-grid">
+    {% for event in events %}
+        <div class="event-card">
+            <h3>{{ event.title }}</h3>
+            <p><strong>Date:</strong> {{ event.date }}</p>
+            <p><strong>Venue:</strong> {{ event.venue }}</p>
+            <p>{{ event.description|truncatewords:20 }}</p>
+            <a class="btn" href="{% url 'event_detail' event.id %}">View Details</a>
+        </div>
+    {% empty %}
+        <p>No events available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

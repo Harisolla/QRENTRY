@@ -1,0 +1,247 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Sign In | QREntry{% endblock %}
+
+{% block content %}
+<!-- Optional: add form styles here or in static CSS -->
+ <style>
+  /* Include your entire <style> here */
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(to top, #d4e9f5, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .login-wrapper {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    .login-icon {
+      font-size: 2.4rem;
+      background: #f4f4f4;
+      padding: 12px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .login-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .login-subtitle {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-field {
+      position: relative;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .input-field input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      background: #f9f9f9;
+    }
+
+    .forgot {
+      text-align: right;
+      font-size: 0.85rem;
+      margin: 0.3rem 0 1.3rem;
+    }
+
+    .forgot a {
+      text-decoration: none;
+      color: #555;
+    }
+
+    .login-button {
+      width: 100%;
+      background: black;
+      color: white;
+      padding: 0.9rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+    }
+
+    .login-divider {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .login-divider::before,
+    .login-divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 45%;
+      height: 1px;
+      background: #ccc;
+    }
+
+    .login-divider::before {
+      left: 0;
+    }
+
+    .login-divider::after {
+      right: 0;
+    }
+
+    .social-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    .social-button {
+      flex: 1;
+      padding: 0.7rem 0;
+      border-radius: 10px;
+      background: #f1f1f1;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .brand-logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-logo img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .form-group {
+  margin-bottom: 1.2rem;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 0.9rem 2.5rem 0.9rem 2.5rem;
+  border: none;
+  border-radius: 999px;
+  background: #f0f0f0;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: inset 0 0 0 1px #ccc;
+  transition: box-shadow 0.2s;
+}
+
+.input-wrapper input:focus {
+  box-shadow: 0 0 0 2px #007bff40;
+  background-color: #fff;
+}
+
+.eye {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.eye::before {
+  content: "\1F441"; /* eye icon */
+  font-size: 18px;
+}
+
+
+    @media (max-width: 500px) {
+      .login-wrapper {
+        padding: 1.5rem;
+      }
+    }
+</style>
+
+<div class="login-wrapper">
+  <div class="login-icon">🔐</div>
+  <div class="login-title">Sign in</div>
+  <div class="login-subtitle">
+    Make a new doc to bring your words, data,<br/>
+    and teams together. For free
+  </div>
+  
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <div class="input-wrapper">
+        <input type="text" name="username" placeholder="Username" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-wrapper">
+        <input type="password" name="password" placeholder="Password" required>
+        <span class="eye"></span>
+      </div>
+    </div>
+
+    <div class="forgot"><a href="#">Forgot password?</a></div>
+    <button type="submit" class="login-button">Get Started</button>
+  </form>
+
+  <div class="login-divider">Or sign in with</div>
+
+  <div class="social-buttons">
+    <button class="social-button">G</button>
+    <button class="social-button">f</button>
+    <button class="social-button"></button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const eyeIcon = document.querySelector('.eye');
+    const passwordInput = document.querySelector('input[type="password"]');
+    eyeIcon.addEventListener('click', function () {
+      passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    });
+  });
+</script>
+{% endblock %}
+
+

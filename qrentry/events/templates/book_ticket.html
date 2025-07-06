@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Book Tickets - {{ event.title }}{% endblock %}
+{% load static %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
+    <h2>🎟️ Book Tickets for "{{ event.title }}"</h2>
+
+    <form method="POST" action="{% url 'confirm_booking' event.id %}">
+        {% csrf_token %}
+
+        <!-- Ticket Categories -->
+        <div style="margin: 1.5rem 0;">
+            {% for ticket in tickets %}
+            <div style="margin-bottom: 1rem; padding: 1rem; border: 1px solid #ddd; border-radius: 8px;">
+                <h4>{{ ticket.category }} - ₹{{ ticket.price }}</h4>
+                <label>Quantity:</label>
+                <select name="ticket_{{ ticket.id }}" style="margin-left: 1rem;">
+                    {% for i in "012345"|make_list %}
+                    <option value="{{ forloop.counter0 }}">{{ forloop.counter0 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% empty %}
+            <p>No ticket categories available.</p>
+            {% endfor %}
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <button type="submit" class="btn" style="font-size: 1.1rem; padding: 0.6rem 2rem;">Proceed to Payment</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

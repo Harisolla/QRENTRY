@@ -1,0 +1,37 @@
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block title %}{{ event.title }} - Eventora{% endblock %}
+
+    {% block content %}
+    <div style="max-width: 900px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
+        <!-- Event Title -->
+        <h2 style="margin-bottom: 1rem;">{{ event.title }}</h2>
+
+        <!-- Event Info Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+            <div>
+                <p><strong>📅 Date:</strong> {{ event.date }}</p>
+                <p><strong>⏰ Time:</strong> {{ event.time }}</p>
+                <p><strong>📍 Venue:</strong> {{ event.venue }}</p>
+            </div>
+            <div style="text-align: right;">
+                <!-- Optional: Insert event banner or future pricing here -->
+                <img src="{% static 'images/event-placeholder.jpg' %}" alt="Event Banner" style="width: 100%; max-width: 300px; border-radius: 10px;">
+            </div>
+        </div>
+
+        <!-- Event Description -->
+        <div style="margin-bottom: 2rem;">
+            <h4>Description</h4>
+            <p style="line-height: 1.6;">{{ event.description }}</p>
+        </div>
+
+        <!-- Book Now Button -->
+        <div style="text-align: center;">
+            <a href="{% url 'book_ticket' event.id %}" class="btn" style="padding: 0.7rem 1.5rem; font-size: 1.1rem;">
+        🎟️ Book Now
+    </a>
+
+        </div>
+    </div>
+    {% endblock %}

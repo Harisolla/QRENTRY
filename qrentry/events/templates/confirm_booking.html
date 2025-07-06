@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirm Booking - {{ event.title }}{% endblock %}
+
+{% block content %}
+<h2>Confirm Your Booking for "{{ event.title }}"</h2>
+
+{% if selected_tickets %}
+    <ul>
+        {% for ticket in selected_tickets %}
+            <li>{{ ticket.category }} - Quantity: {{ ticket.quantity }} - Subtotal: ₹{{ ticket.subtotal }}</li>
+        {% endfor %}
+    </ul>
+    <p><strong>Total: ₹{{ total }}</strong></p>
+   <form method="POST" action="{% url 'payment' event.id %}">
+ <!-- Later add payment URL -->
+        {% csrf_token %}
+        <button type="submit">Proceed to Payment</button>
+    </form>
+{% else %}
+    <p>No tickets selected. <a href="{% url 'book_ticket' event.id %}">Go back to booking</a></p>
+{% endif %}
+{% endblock %}
