@@ -446,14 +446,6 @@ def attendance_form(request):
     return render(request, 'attendance.html')
 
 
-from django.contrib.auth.models import User
-
-def create_admin_user():
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser("admin", "admin@example.com", "admin123")
-        print("Superuser created")
-
-create_admin_user()
 
 
 @login_required
