@@ -1,0 +1,211 @@
+
+html, body {
+  scroll-behavior: smooth;
+  margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+  background: linear-gradient(to bottom, #faf2f2, #d0e5fa);
+   
+    
+}
+/* Base link style */
+/* Gradient text for logo (permanent) */
+.navbar-brand {
+    background: linear-gradient(to right, #cfdaff, #2978d2); /* white to light blue */
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.navbar {
+  background-color: #0d1b2a;  /* Deep Navy */
+  padding: .5rem 1rem;
+}
+
+
+
+.navbar .nav-link {
+
+    position: relative;
+    opacity: 0.9;
+    transition: transform 0.2s ease, opacity 0.2s ease, background 0.3s ease border-bottom 0.3s ease;
+    border-radius: 4px;
+    color: #ffffff;
+    
+}
+
+
+
+/* Hover: gradient + scale + full opacity */
+.navbar .nav-link:hover {
+    opacity: 1;
+    /* transform: scale(1.1); */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+    color: #33AEFF;
+}
+
+/* Optional: active link highlight */
+.navbar .nav-link.active {
+    opacity: 1;
+    font-weight: 600;
+    color: #33AEFF;
+    border-bottom: 2px solid #fff;
+}
+
+.navbar-toggler .navbar-toggler-icon {
+    filter: invert(1); /* Invert colors for dark background */
+}
+
+/* Ensure collapsed menu looks clean */
+@media (max-width: 991px) {
+  .navbar-collapse {
+
+    border-radius: 8px;
+    padding: 10px 0;
+  }
+  .navbar-nav .nav-link {
+    color: #ffffff !important;  
+    font-weight: 500;
+  }
+  .navbar-nav .nav-link:hover {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+    color: #33AEFF;
+    border-radius: 6px;
+  }
+}
+
+
+/* Hover lift effect for cards */
+.hover-lift:hover {
+    transform: translateY(-5px);
+    transition: transform 0.2s ease;
+}
+
+/* Hover scale effect for features */
+.hover-scale:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+/* Gradient heading text */
+.gradient-text {
+    background: linear-gradient(270deg, #90aaff, #398ff3, #667eea, #764ba2);
+    background-size: 600% 600%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    animation: gradientShift 10s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* Button gradient style */
+.btn-gradient {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+}
+.btn-gradient:hover {
+  opacity: 0.9;
+}
+
+/* CSS Fallback Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.events-section {
+    background: linear-gradient(to bottom, #f9fafb, #f3f4f6); /* very subtle gray gradient */
+    padding: 50px 0;
+    border-radius: 8px;
+}
+/* Softer card background */
+.card.bg-soft {
+  background: #eef2f7; /* light bluish-gray */
+    border: 1px solid #dbe1e7;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.card.bg-soft:hover {
+    background: linear-gradient(to bottom right, #e8eeff, #f3f6ff);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.pagination .page-link {
+  color: #667eea;
+  border: none;
+}
+.pagination .page-item.active .page-link {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+}
+.pagination .page-item:hover .page-link {
+  background-color: #e9ecef;
+}
+
+
+
+.custom-alert {
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(-5px);
+    animation: fadeSlideIn 0.5s ease forwards;
+     max-width: 400px;       /* limit width */
+    width: 90%;             /* responsive for smaller screens */
+    margin: 0 auto;
+}
+
+@keyframes fadeSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.custom-alert.error {
+    background: linear-gradient(135deg, #ff4d4d, #ff1a1a);
+    color: #fff;
+}
+
+.custom-alert.success {
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: #fff;
+}
+
+.custom-alert.info {
+    background: linear-gradient(135deg, #17a2b8, #117a8b);
+    color: #fff;
+}
+

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Scan Attendance{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: #f3f4f6;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .attendance-container {
+        max-width: 500px;
+        margin: 3rem auto;
+        padding: 2rem;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .attendance-container h2 {
+        text-align: center;
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: #111827;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #374151;
+    }
+
+    .form-control {
+        padding: 0.65rem 1rem;
+        font-size: 1rem;
+        border-radius: 12px;
+        border: 1px solid #d1d5db;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-control:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        outline: none;
+    }
+
+    .btn-primary {
+        background: #3b82f6;
+        color: #ffffff;
+        padding: 0.65rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 12px;
+        border: none;
+        transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-primary:hover {
+        background: #2563eb;
+        transform: translateY(-2px);
+    }
+
+    .alert {
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .alert-success {
+        background: #d1fae5;
+        color: #065f46;
+    }
+
+    .alert-danger {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+</style>
+
+<div class="attendance-container">
+    <h2>🎫 Mark Attendance</h2>
+    <form method="POST" class="d-flex flex-column gap-3">
+        {% csrf_token %}
+        <div class="mb-3 w-100">
+            <label for="ticket_id" class="form-label">Enter Ticket ID:</label>
+            <input type="text" id="ticket_id" name="ticket_id" class="form-control" placeholder="e.g. TICK1234" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Mark Attendance</button>
+    </form>
+
+    {% if status == 'success' %}
+        <div class="alert alert-success mt-4">
+            ✅ Attendance marked for ticket ID <strong>{{ ticket_id }}</strong>
+        </div>
+    {% elif status == 'fail' %}
+        <div class="alert alert-danger mt-4">
+            ❌ Invalid or already marked ticket ID: <strong>{{ ticket_id }}</strong>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
