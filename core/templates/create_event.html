@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Create Event{% endblock %}
+
+{% block content %}
+<style>
+/* Global font & body */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+}
+
+/* Center the form vertically */
+.create-event-modern {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 15px;
+}
+
+/* Card container */
+.create-event-card {
+    background: #ffffff;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+}
+
+/* Title */
+.create-event-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+/* Form fields */
+.form-group {
+    margin-bottom: 1.8rem;
+    position: relative;
+}
+
+.create-event-card label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+/* Inputs */
+.create-event-card input,
+.create-event-card textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.create-event-card input:focus,
+.create-event-card textarea:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 8px rgba(106,17,203,0.2);
+}
+
+/* Error messages */
+.text-danger {
+    font-size: 0.85rem;
+    color: #e74c3c;
+    margin-top: 0.3rem;
+    display: block;
+}
+
+/* Button */
+.btn-gradient {
+    display: block;
+    width: 50%;
+    margin: 2rem auto 0 auto;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    border: none;
+    padding: 0.85rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+/* File input & preview */
+#image-preview {
+    max-width: 220px;
+    border-radius: 12px;
+    margin-top: 10px;
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .create-event-title {
+        font-size: 2rem;
+    }
+    .btn-gradient {
+        width: 70%;
+    }
+}
+</style>
+
+<section class="create-event-modern">
+  <div class="create-event-card">
+    <h2 class="create-event-title">🎉 Plan Your Event</h2>
+    <p class="subtitle">Fill in the details below to create your event.</p>
+
+    <form method="POST" enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+
+      <!-- Event Name -->
+      <div class="form-group">
+        <label for="id_name">Event Name</label>
+        <input type="text" name="name" id="id_name" value="{{ form.name.value|default:'' }}" required>
+        {% for error in form.name.errors %}
+          <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <!-- Event Date -->
+      <div class="form-group">
+        <label for="id_date">Date</label>
+        <input type="date" name="date" id="id_date" value="{{ form.date.value|default:'' }}" required>
+        {% for error in form.date.errors %}
+          <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <!-- Event Location -->
+      <div class="form-group">
+        <label for="id_location">Location</label>
+        <input type="text" name="location" id="id_location" value="{{ form.location.value|default:'' }}" required>
+        {% for error in form.location.errors %}
+          <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <!-- Event Price -->
+      <div class="form-group">
+        <label for="id_price">Price (₹)</label>
+        <input type="number" name="price" id="id_price" value="{{ form.price.value|default:'' }}" min="0" required>
+        {% for error in form.price.errors %}
+          <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <!-- Event Capacity -->
+      <div class="form-group">
+        <label for="id_capacity">Capacity</label>
+        <input type="number" name="capacity" id="id_capacity" value="{{ form.capacity.value|default:'' }}" min="1" required>
+        {% for error in form.capacity.errors %}
+          <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <!-- Event Description -->
+      <div class="form-group">
+        <label for="id_description">Description</label>
+        <textarea name="description" id="id_description" rows="4" required>{{ form.description.value|default:'' }}</textarea>
+        {% for error in form.description.errors %}
+          <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <!-- Event Image -->
+      <div class="form-group">
+        <label for="id_image">Upload Event Image</label>
+        <input type="file" name="image" id="id_image" accept="image/*" onchange="previewImage(event)">
+        <img id="image-preview" />
+      </div>
+
+      <button type="submit" class="btn btn-gradient">Create Event</button>
+    </form>
+  </div>
+</section>
+
+<script>
+function previewImage(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('image-preview');
+    if(file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+    } else {
+        preview.style.display = 'none';
+    }
+}
+</script>
+{% endblock %}
+ 

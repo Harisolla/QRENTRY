@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Login - QrEntry{% endblock %}
+
+{% block content %}
+<style>
+body {
+    background: url("{% static 'images/signup-bg.png' %}") no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Glass effect card */
+.glass-card {
+    background: rgba(20, 20, 20, 0.85);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Input fields */
+.glass-card .form-control {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+.glass-card .form-control:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 0 0.2rem rgba(106, 17, 203, 0.25);
+}
+
+/* Buttons */
+.btn-gradient {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    border: none;
+}
+.btn-gradient:hover {
+    opacity: 0.9;
+}
+
+/* Forgot Password link */
+.forgot-password {
+    display: block;
+    text-align: right;
+    margin-bottom: 1rem;
+}
+.forgot-password a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+</style>
+
+<section class="py-5 min-vh-95 d-flex align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+
+        <!-- Glass Card -->
+        <div class="glass-card shadow-lg" data-aos="fade-up">
+
+          <!-- Header -->
+          <div class="text-center mb-4">
+            <h2 class="fw-bold text-white">Welcome Back</h2>
+            <p class="small text-white-50">Login to manage your events and bookings</p>
+          </div>
+
+          <!-- Login Form -->
+          <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="mb-3">
+              <input type="text" class="form-control" id="username" name="username" placeholder="Username or Email" required>
+            </div>
+
+            <div class="mb-3">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            </div>
+
+            <!-- Forgot Password -->
+            <div class="forgot-password">
+              <a href="{% url 'password_reset' %}">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-gradient w-50 mx-auto d-block py-2 fw-bold">Login</button>
+          </form>
+
+          <div class="text-center mt-3">
+            <small class="text-white-50">Don't have an account?
+              <a href="{% url 'signup' %}" class="text-white fw-bold">Sign Up</a>
+            </small>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

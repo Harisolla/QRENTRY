@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Choose Role - QrEntry{% endblock %}
+
+{% block content %}
+<style>
+body {
+    background: url("{% static 'images/signup-bg.png' %}") no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Glass card */
+.glass-card {
+    background: rgba(20, 20, 20, 0.85);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-gradient {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+}
+.btn-gradient:hover {
+    opacity: 0.95;
+    transform: translateY(-2px);
+}
+</style>
+
+<section class="py-5 min-vh-95 d-flex align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+
+        <div class="glass-card text-center">
+
+          <h2 class="fw-bold text-white mb-3">Choose Your Role</h2>
+          <p class="text-white-50 mb-4">You need to select your role to continue</p>
+
+          {% if error %}
+            <p class="text-danger">{{ error }}</p>
+          {% endif %}
+
+          <form method="post">
+            {% csrf_token %}
+            <div class="mb-3 text-start">
+              <input type="radio" id="organiser" name="role" value="organiser">
+              <label for="organiser" class="text-white ms-2">Organiser</label>
+            </div>
+
+            <div class="mb-4 text-start">
+              <input type="radio" id="participant" name="role" value="participant">
+              <label for="participant" class="text-white ms-2">Participant</label>
+            </div>
+
+            <button type="submit" class="btn btn-gradient w-50 py-2 fw-bold">Continue</button>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

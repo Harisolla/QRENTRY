@@ -1,0 +1,236 @@
+  {% extends 'base.html' %}
+  {% load static %}
+  {% block title %}Events - QrEntry{% endblock %}
+
+  {% block content %}
+  <style>
+/* Card Styling */
+.event-card {
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.event-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+}
+
+/* Image hover zoom */
+.event-card img {
+  border-radius: 20px 20px 0 0;
+  transition: transform 0.4s ease;
+  object-fit: cover;
+  height: 220px;
+  width: 100%;
+}
+
+
+/* Card body */
+.event-card .card-body {
+  padding: 1.2rem;
+}
+
+.event-card .card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin-bottom: 0.5rem;
+}
+
+.event-card .event-meta {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6c757d;
+  margin-bottom: 0.75rem;
+}
+
+.event-card .card-text {
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* Footer actions */
+.event-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.event-price {
+  font-weight: bold;
+  color: #28a745;
+  font-size: 1rem;
+}
+
+/* Gradient button */
+.btn-gradient {
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  color: white;
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #8f94fb, #4e54c8);
+  transform: scale(1.05);
+}
+
+.event-card img {
+  width: 100%;
+  height: 220px;       /* Adjust height as per your design */
+  object-fit: cover;   /* Ensures image fills container without distortion */
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+</style>
+
+  <!-- HERO SECTION -->
+  <section class="py-5 text-center gradient-bg text-white mb-4" data-aos="fade-up">
+    <div class="container">
+      <h1 class="fw-bold display-5">Discover Exciting Events</h1>
+      <p class="lead">Browse, book, and experience events tailored to your interests.</p>
+    </div>
+  </section>
+
+  <!-- CATEGORY QUICK FILTERS -->
+  <div class="container text-center mb-4" data-aos="fade-up" data-aos-delay="200">
+    <span class="badge bg-primary mx-1 px-3 py-2">Music</span>
+    <span class="badge bg-secondary mx-1 px-3 py-2">Tech</span>
+    <span class="badge bg-success mx-1 px-3 py-2">Sports</span>
+    <span class="badge bg-warning mx-1 px-3 py-2">Workshops</span>
+    <span class="badge bg-info mx-1 px-3 py-2">Festivals</span>
+  </div>
+
+  <!-- FILTER FORM -->
+  <div class="container mb-5">
+    <form method="get" action="{% url 'event_list' %}" 
+          class="row g-3 align-items-end border rounded p-3 bg-white shadow-sm"
+          data-aos="fade-up" data-aos-delay="300">
+
+      <!-- Search -->
+      <div class="col-md-4">
+        <label for="search" class="form-label">Search</label>
+        <input type="text" id="search" name="search" value="{{ request.GET.search }}" 
+              class="form-control" placeholder="Event name or location">
+      </div>
+
+      <!-- Date Range -->
+      <div class="col-md-3">
+        <label for="date_from" class="form-label">From</label>
+        <input type="date" id="date_from" name="date_from" value="{{ request.GET.date_from }}" class="form-control">
+      </div>
+      <div class="col-md-3">
+        <label for="date_to" class="form-label">To</label>
+        <input type="date" id="date_to" name="date_to" value="{{ request.GET.date_to }}" class="form-control">
+      </div>
+
+      <!-- Price Max -->
+      <div class="col-md-2">
+        <label for="price_max" class="form-label">Max Price (₹)</label>
+        <input type="number" id="price_max" name="price_max" value="{{ request.GET.price_max }}" class="form-control" min="0">
+      </div>
+
+      <!-- Buttons -->
+      <div class="col-12 text-end">
+        <button type="submit" class="btn btn-primary">Apply Filters</button>
+        <a href="{% url 'event_list' %}" class="btn btn-outline-secondary">Reset</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- ORGANIZER CTA -->
+  {% if user.is_authenticated and user.profile.role == 'organiser' %}
+  <div class="text-center my-4" data-aos="fade-up">
+    <a href="{% url 'create_event' %}" class="btn btn-gradient px-4 py-2 fw-bold">+ Create New Event</a>
+  </div>
+  {% endif %}
+
+  <div class="container mb-5">
+  <div class="row g-4">
+    {% for event in events %}
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:100 }}">
+        <div class="card event-card h-100">
+          {% if event.image %}
+            <img src="{{ event.image.url }}" alt="{{ event.name }}">
+          {% else %}
+            <img src="https://picsum.photos/400/200?random={{ forloop.counter }}" alt="{{ event.name }}">
+          {% endif %}
+
+          <div class="card-body">
+            <h5 class="card-title">{{ event.name }}</h5>
+            <p class="event-meta">
+              <i class="bi bi-calendar-event me-1"></i> {{ event.date }}  
+              • <i class="bi bi-geo-alt me-1"></i> {{ event.location }}
+            </p>
+            <p class="card-text">{{ event.description|truncatewords:20 }}</p>
+
+            <div class="event-footer">
+              <span class="event-price">₹{{ event.price }}</span>
+              <a href="{% url 'event_detail' event.id %}" class="btn btn-gradient btn-sm">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="text-center py-5">
+        <img src="https://picsum.photos/300/200?grayscale" class="mb-3 rounded" alt="No events">
+        <h5>No events available</h5>
+        <p class="text-muted">Try adjusting filters or check back later.</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+  <!-- PAGINATION -->
+  {% if events.has_other_pages %}
+  <nav aria-label="Events pagination">
+    <ul class="pagination justify-content-center mt-4">
+
+      <!-- Previous -->
+      {% if events.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ events.previous_page_number }}">&laquo; Prev</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">&laquo; Prev</span>
+        </li>
+      {% endif %}
+
+      <!-- Numbered pages -->
+      {% for num in events.paginator.page_range %}
+        {% if events.number == num %}
+          <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+        {% else %}
+          <li class="page-item">
+            <a class="page-link" href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ num }}">{{ num }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      <!-- Next -->
+      {% if events.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ events.next_page_number }}">Next &raquo;</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Next &raquo;</span>
+        </li>
+      {% endif %}
+
+    </ul>
+  </nav>
+  {% endif %}
+
+  {% endblock %}

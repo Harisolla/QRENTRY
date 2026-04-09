@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ event.name }} - Details{% endblock %}
+
+{% block content %}
+<style>
+/* ================= EVENT DETAILS PAGE ================= */
+.event-details {
+    max-width: 1050px;
+    margin: 70px auto;
+    padding: 2.5rem;
+    border-radius: 22px;
+    color: #fff;
+    position: relative;
+    background: linear-gradient(rgba(10, 10, 25, 0.2), rgba(20, 20, 40, 0.95)),
+                url('{{ event.image.url }}') center/cover no-repeat;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 15px 45px rgba(0,0,0,0.7);
+    animation: fadeInUp 0.9s ease;
+    overflow: hidden;
+}
+
+/* Subtle glowing border */
+.event-details::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    padding: 2px;
+    background: linear-gradient(135deg, #00d4ff, #6a11cb, #ff6ec7);
+     -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* Smooth entrance */
+@keyframes fadeInUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 1.5rem;
+    color: #cfcfcf;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.back-link:hover {
+    color: #00d4ff;
+    transform: translateX(-4px);
+}
+
+/* Title & Description */
+.event-title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 1rem;
+    letter-spacing: 1.2px;
+    background: linear-gradient(90deg, #00d4ff, #6a11cb, #ff6ec7);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.event-desc {
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    color: #dcdcdc;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Event Meta Section */
+.event-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-bottom: 3rem;
+}
+.event-meta div {
+     background: linear-gradient(rgba(10, 10, 25, 0.2), rgba(20, 20, 40, 0.6));
+    padding: 1.5rem;
+    border-radius: 14px;
+    text-align: center;
+    transition: transform 0.35s ease, background 0.35s ease;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+.event-meta div:hover {
+    transform: translateY(-7px);
+    background: rgba(255,255,255,0.08);
+}
+.event-meta strong {
+    display: block;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: #00d4ff;
+}
+
+/* Booking Button */
+.book-btn {
+    display: block;
+    width: 25%;
+    margin: 0 auto;
+    padding: 1rem;
+    background: linear-gradient(135deg, #6a11cb, #2575fc, #00d4ff);
+    border: none;
+    border-radius: 14px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.3rem;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 0.6px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.5);
+}
+.book-btn:hover {
+    background: linear-gradient(135deg, #2575fc, #6a11cb, #ff6ec7);
+    transform: scale(1.07);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.65);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .event-title { font-size: 2.2rem; }
+    .event-desc { font-size: 1rem; }
+    .book-btn { width: 100%; font-size: 1.1rem; }
+}
+</style>
+
+<div class="event-details">
+    <a href="/events/" class="back-link">← Back to Events</a>
+
+    <h2 class="event-title">{{ event.name }}</h2>
+    <p class="event-desc">{{ event.description }}</p>
+
+    <div class="event-meta">
+        <div>
+            <strong>📍 Venue</strong>
+            {{ event.location }}
+        </div>
+        <div>
+            <strong>📅 Date</strong>
+            {{ event.date }}
+        </div>
+        <div>
+            <strong>💰 Price</strong>
+            ₹{{ event.price }}
+        </div>
+    </div>
+
+    <form method="GET" action="{% url 'fake_payment' event.id %}">
+        <button type="submit" class="book-btn">🎟️ Book Ticket</button>
+    </form>
+</div>
+{% endblock %}

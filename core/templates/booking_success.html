@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+
+{% block title %}Booking Success{% endblock %}
+
+{% block content %}
+<style>
+/* Centered container */
+.success-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 60vh;
+    padding: 60px 20px;
+    
+}
+
+/* Success icon animation */
+.success-icon {
+    font-size: 4rem;
+    color: #28a745;
+    animation: bounce 1s ease infinite alternate;
+}
+
+/* Gradient heading */
+.success-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(270deg, #90aaff, #398ff3, #667eea, #764ba2);
+    background-size: 600% 600%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 10s ease infinite;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Animated gradient shift */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Message text */
+.success-msg {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Buttons */
+.success-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.success-btn:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+}
+
+/* Bounce animation for icon */
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+/* Card style for details with background blobs */
+.booking-details-card {
+    position: relative;
+    background: #d3bafe;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    padding: 25px 30px;
+    max-width: 500px;
+    width: 100%;
+    margin-top: 30px;
+    text-align: left;
+    overflow: hidden;
+}
+
+/* More visible blobs */
+.booking-details-card .blob {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.25; /* increased opacity */
+    z-index: 0;
+    background: radial-gradient(circle at center, rgba(17, 21, 43, 0.4), rgba(24, 15, 33, 0.1));
+    animation: float 6s ease-in-out infinite;
+}
+
+.booking-details-card .blob1 { width: 140px; height: 140px; top: -40px; left: -40px; animation-delay: 0s; }
+.booking-details-card .blob2 { width: 200px; height: 200px; bottom: -60px; right: -60px; animation-delay: 2s; }
+.booking-details-card .blob3 { width: 120px; height: 120px; top: 30%; right: -50px; animation-delay: 4s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(30deg); }
+}
+
+/* Ensure text and badges stay above blobs */
+.booking-details-card h5,
+.booking-details-card p,
+.booking-details-card .badge,
+.booking-details-card a.success-btn {
+    position: relative;
+    z-index: 1;
+}
+
+/* Text inside card */
+.booking-details-card h5 {
+    position: relative;
+    z-index: 1;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.booking-details-card p {
+    position: relative;
+    z-index: 1;
+    margin: 10px 0;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.booking-details-card .badge {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.badge-confirmed {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.booking-details-card a.success-btn {
+    margin-left: 5px;
+    z-index: 1;
+}
+</style>
+
+<div class="success-container" data-aos="fade-up">
+    <!-- Success Icon -->
+    <div class="success-icon">
+        <i class="bi bi-check-circle-fill"></i>
+    </div>
+
+    <!-- Heading -->
+    <h2 class="success-heading">Booking Successful!</h2>
+
+    <!-- Message -->
+    <p class="success-msg">Thank you for booking with QrEntry. Your ticket has been confirmed.</p>
+
+    <!-- Buttons -->
+    <div>
+        <a href="{% url 'booking_list' %}" class="success-btn">View My Bookings</a>
+        <a href="{% url 'event_list' %}" class="success-btn">Browse More Events</a>
+    </div>
+
+    <!-- Booking Details Card with blobs -->
+<div class="booking-details-card" data-aos="fade-up" data-aos-delay="200">
+    <!-- Blobs -->
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+
+    <h5>Event: {{ booking.event.name }}</h5>
+    <p><strong>Date:</strong> {{ booking.event.date }}</p>
+    <p><strong>Location:</strong> {{ booking.event.location }}</p>
+    <p><strong>Ticket ID:</strong> {{ booking.ticket_id }}</p>
+    <p><strong>Status:</strong> <span class="badge badge-confirmed">{{ booking.status }}</span></p>
+    {% if booking.qr_code_path %}
+    <p><strong>QR Code:</strong> <a href="/media/{{ booking.qr_code_path }}" target="_blank" class="success-btn">View QR</a></p>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

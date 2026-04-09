@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Payment Page{% endblock %}
+
+{% block content %}
+<style>
+.payment-container {
+    text-align: center;
+    margin-top: 80px;
+    color: #fff;
+}
+.payment-container h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #8839ea; /* vibrant aqua-blue */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    margin-bottom: 1rem;
+}
+
+.payment-container p.lead {
+    font-size: 1.3rem;
+    color: #067a25; /* soft green for amount */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    margin-bottom: 2rem;
+}
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255,255,255,0.2);
+    border-top-color: #28a745;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+    display: none;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+.processing-text {
+    font-size: 1.2rem;
+    margin-top: 15px;
+    display: none;
+}
+.payment-container button {
+    background: linear-gradient(135deg, #00b09b, #96c93d);
+    color: #fff;
+    font-weight: 600;
+    padding: 0.7rem 2rem;
+    border: none;
+    border-radius: 8px;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+}
+
+.payment-container button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+</style>
+
+<div class="payment-container">
+    <h2>💳 Payment for {{ event.name }}</h2>
+    <p class="lead">Amount: ₹{{ event.price }}</p>
+    
+    <form method="POST" id="payment-form">
+        {% csrf_token %}
+        <button class="btn btn-success btn-lg" id="pay-btn">Pay Now</button>
+    </form>
+
+    <!-- Spinner + Processing text -->
+    <div class="spinner" id="spinner"></div>
+    <div class="processing-text" id="processing-text">Processing Payment, please wait...</div>
+</div>
+
+<script>
+document.getElementById("payment-form").addEventListener("submit", function(e){
+    // Show spinner + text
+    document.getElementById("spinner").style.display = "block";
+    document.getElementById("processing-text").style.display = "block";
+    document.getElementById("pay-btn").disabled = true;
+});
+</script>
+{% endblock %}

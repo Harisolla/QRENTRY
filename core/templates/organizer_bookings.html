@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}Organizer Bookings{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: #f9fafb;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .booking-container {
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .booking-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 1.5rem 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .booking-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .booking-info {
+        flex: 1 1 60%;
+    }
+
+    .booking-header {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .badge-status {
+        padding: 0.35rem 0.9rem;
+        font-size: 0.85rem;
+        border-radius: 9999px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    .badge-status.confirmed {
+        background: #d1fae5;
+        color: #065f46;
+    }
+
+    .badge-status.pending {
+        background: #fef3c7;
+        color: #92400e;
+    }
+
+    .badge-status.cancelled {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .booking-meta {
+        font-size: 0.9rem;
+        color: #4b5563;
+        line-height: 1.5;
+    }
+
+    .no-bookings {
+        text-align: center;
+        font-size: 1rem;
+        color: #6b7280;
+        margin-top: 4rem;
+    }
+
+    h2.page-title {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: #1f2937;
+    }
+</style>
+
+<div class="booking-container">
+    <h2 class="page-title">📦 Bookings for Your Events</h2>
+
+    {% if bookings %}
+        {% for booking in bookings %}
+        <div class="booking-card">
+            <div class="booking-info">
+                <div class="booking-header">
+                    {{ booking.event.name }}
+                    <span class="badge-status 
+                        {% if booking.status == 'CONFIRMED' %}confirmed
+                        {% elif booking.status == 'PENDING' %}pending
+                        {% else %}cancelled{% endif %}">
+                        {{ booking.status }}
+                    </span>
+                </div>
+                <div class="booking-meta">
+                    <strong>Participant:</strong> {{ booking.user.username }} <br>
+                    <strong>Ticket ID:</strong> {{ booking.ticket_id }} <br>
+                    <strong>Booking Time:</strong> {{ booking.booking_time|date:"d M Y, h:i A" }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="no-bookings">No bookings found for your events.</p>
+    {% endif %}
+</div>
+{% endblock %}
