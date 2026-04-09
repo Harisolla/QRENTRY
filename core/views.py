@@ -172,7 +172,9 @@ def signup_view(request):
         form = SignUpForm(request.POST)
         role = request.POST.get('role')
 
-        if form.is_valid():
+        if role not in ['organiser', 'participant']:
+            messages.error(request, "Please select a valid role.")
+        elif form.is_valid():
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
@@ -183,11 +185,17 @@ def signup_view(request):
             messages.success(request, "Signup successful!")
             return redirect('login')
         else:
-            messages.error(request, "Signup failed. Please check the form.")
+            for field, errors in form.errors.items():
+                label = field.replace('_', ' ').title() if field != '__all__' else 'Signup'
+                for error in errors:
+                    messages.error(request, f"{label}: {error}")
     else:
         form = SignUpForm()
 
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'signup.html', {
+        'form': form,
+        'selected_role': request.POST.get('role', ''),
+    })
 
 
 
