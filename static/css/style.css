@@ -1167,3 +1167,122 @@ a {
   color: #555;
   box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
 }
+
+/* Enterprise Theme Overrides */
+:root {
+  --bg-base: #f3f7fc;
+  --bg-surface: #ffffff;
+  --text-primary: #10233f;
+  --text-muted: #5b6b82;
+  --brand-500: #1e63d3;
+  --brand-600: #174fa9;
+  --accent-500: #12a6c3;
+  --border-soft: #dbe4f1;
+  --shadow-sm: 0 4px 14px rgba(16, 35, 63, 0.08);
+  --shadow-md: 0 10px 24px rgba(16, 35, 63, 0.12);
+}
+
+body {
+  background: var(--bg-base);
+}
+
+.brand-gradient {
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: #dbe9ff;
+}
+
+.site-navbar {
+  background: #10233f;
+}
+
+.navbar .nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.navbar .nav-link.active {
+  background: rgba(30, 99, 211, 0.34);
+  box-shadow: none;
+}
+
+.btn-primary,
+.btn-gradient {
+  background: var(--brand-500);
+}
+
+.btn-primary:hover,
+.btn-gradient:hover {
+  background: var(--brand-600);
+}
+
+.gradient-text {
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: #eaf2ff;
+}
+
+.gradient-bg,
+.events-hero {
+  background: #174fa9;
+}
+
+.card,
+.event-filter,
+.create-event-card,
+.payment-card,
+.qr-scan-card,
+.org-booking-card,
+.booking-summary-card,
+.attendance-card {
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.card:hover,
+.hover-lift:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.hero-section {
+  background: linear-gradient(rgba(16, 35, 63, 0.66), rgba(16, 35, 63, 0.66)),
+    url("../images/hero_back.jpg") center / cover no-repeat;
+}
+
+.auth-shell,
+.attendance-shell--visual {
+  background: linear-gradient(rgba(16, 35, 63, 0.78), rgba(16, 35, 63, 0.78)),
+    url("../images/signup-bg.png") center / cover no-repeat;
+}
+
+.home-benefits-section,
+.home-walkthrough-section,
+.events-section,
+.site-footer {
+  background: #f7faff;
+}
+
+.cta-section {
+  background: #174fa9;
+  animation: none;
+}
+
+.cta-content {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-md);
+}
+
+.cta-particles {
+  display: none;
+}
+
+.faq-btn:not(.collapsed) {
+  background: #1e63d3;
+  box-shadow: none;
+}
+
+.feature-icon:hover,
+.feature-img:hover,
+.cta-content .btn:hover,
+#backToTopBtn:hover {
+  transform: none;
+}
