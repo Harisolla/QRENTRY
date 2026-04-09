@@ -1,75 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Scan QR Code</title>
-    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background: #f0f0f0;
-        }
+{% extends 'base.html' %}
+{% block title %}Scan QR Code{% endblock %}
 
-        #reader {
-            width: 300px;
-            margin: auto;
-        }
-
-        .result {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-
-        .success {
-            color: green;
-        }
-
-        .fail {
-            color: red;
-        }
-    </style>
-</head>
-<body>
-    <h2>🎟️ Scan Ticket QR Code</h2>
+{% block content %}
+<section class="qr-scan-shell">
+  <div class="qr-scan-card">
+    <h2>Scan Ticket QR Code</h2>
     <div id="reader"></div>
-    <div class="result" id="resultMsg"></div>
+    <div class="qr-result" id="resultMsg"></div>
+  </div>
+</section>
 
-    <script>
-        function handleScanSuccess(ticketId) {
-            fetch(`/api/attend/${ticketId}/`)
-                .then(response => response.json())
-                .then(data => {
-                    const msg = document.getElementById("resultMsg");
-                    if (data.success) {
-                        msg.innerHTML = `✅ Attendance marked for Ticket ID: <b>${ticketId}</b>`;
-                        msg.className = "result success";
-                    } else {
-                        msg.innerHTML = `❌ ${data.error}`;
-                        msg.className = "result fail";
-                    }
-                });
-        }
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script>
+function handleScanSuccess(ticketId) {
+  fetch(`/api/attend/${ticketId}/`)
+    .then(response => response.json())
+    .then(data => {
+      const msg = document.getElementById("resultMsg");
+      if (data.success) {
+        msg.innerHTML = `Attendance marked for Ticket ID: <b>${ticketId}</b>`;
+        msg.className = "qr-result success";
+      } else {
+        msg.innerHTML = data.error;
+        msg.className = "qr-result fail";
+      }
+    });
+}
 
-        const html5QrCode = new Html5Qrcode("reader");
-
-        html5QrCode.start(
-            { facingMode: "environment" }, // use back camera on phones
-            {
-                fps: 10,
-                qrbox: 250
-            },
-            (decodedText, decodedResult) => {
-                html5QrCode.stop();  // stop scanning once decoded
-                handleScanSuccess(decodedText);
-            },
-            (errorMessage) => {
-                // Optional: handle scan errors
-            }
-        ).catch(err => {
-            document.getElementById("resultMsg").innerText = "Camera access denied or error occurred.";
-        });
-    </script>
-</body>
-</html>
+const html5QrCode = new Html5Qrcode("reader");
+html5QrCode.start(
+  { facingMode: "environment" },
+  { fps: 10, qrbox: 250 },
+  (decodedText) => {
+    html5QrCode.stop();
+    handleScanSuccess(decodedText);
+  },
+  () => {}
+).catch(() => {
+  document.getElementById("resultMsg").innerText = "Camera access denied or an error occurred.";
+  document.getElementById("resultMsg").className = "qr-result fail";
+});
+</script>
+{% endblock %}

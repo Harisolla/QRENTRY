@@ -3,107 +3,21 @@
 {% block title %}Mark Attendance{% endblock %}
 
 {% block content %}
-<style>
-/* Full-page event background */
-body {
-    background: url("{% static 'images/create-event-bg.png' %}") no-repeat center center fixed;
-    background-size: cover;
-}
+<section class="attendance-shell attendance-shell--visual">
+  <div class="attendance-card attendance-card--dark">
+    <h2>Mark Attendance</h2>
 
-/* Container styling */
-.attendance-container {
-    min-height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" name="ticket_id" id="ticket_id" class="form-control mb-3" placeholder="Enter Ticket ID" required>
+      <button type="submit" class="btn btn-gradient w-100">Mark Attendance</button>
+    </form>
 
-/* Glass effect form */
-.attendance-form {
-    background: rgba(20, 20, 20, 0.7);
-    padding: 2rem;
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    width: 350px;
-    text-align: center;
-}
-
-/* Heading */
-.attendance-form h1 {
-    font-size: 2rem;
-    font-weight: 800;
-    background: linear-gradient(90deg, #ffffff, #80d0ff);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1rem;
-}
-
-/* Input */
-.attendance-form input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-bottom: 2px solid #ddd;
-    background: transparent;
-    color: #fff;
-    font-size: 1rem;
-    margin-bottom: 1.2rem;
-    transition: border-color 0.3s ease;
-}
-.attendance-form input[type="text"]:focus {
-    border-bottom: 2px solid #6a11cb;
-    outline: none;
-}
-
-/* Button */
-.attendance-form button {
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    color: #fff;
-    padding: 0.6rem 2rem;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: opacity 0.3s ease;
-}
-.attendance-form button:hover {
-    opacity: 0.9;
-}
-
-/* Success/Error messages */
-.alert-success {
-    color: #fff;
-    background: rgba(0, 200, 83, 0.8);
-    padding: 10px;
-    border-radius: 6px;
-    margin-top: 1rem;
-}
-.alert-error {
-    color: #fff;
-    background: rgba(220, 53, 69, 0.8);
-    padding: 10px;
-    border-radius: 6px;
-    margin-top: 1rem;
-}
-</style>
-
-<section class="attendance-container">
-    <div class="attendance-form">
-        <h1>🎯 Mark Attendance</h1>
-
-        <form method="POST">
-            {% csrf_token %}
-            <input type="text" name="ticket_id" id="ticket_id" placeholder="Enter Ticket ID" required>
-            <button type="submit">Mark Attendance</button>
-        </form>
-
-        {% if success %}
-          <p class="alert-success">✅ {{ message }}</p>
-        {% elif error %}
-          <p class="alert-error">❌ {{ message }}</p>
-        {% endif %}
-    </div>
+    {% if success %}
+      <p class="attendance-alert is-success mt-3">{{ message }}</p>
+    {% elif error %}
+      <p class="attendance-alert is-danger mt-3">{{ message }}</p>
+    {% endif %}
+  </div>
 </section>
 {% endblock %}

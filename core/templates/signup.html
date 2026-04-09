@@ -4,141 +4,53 @@
 {% block title %}Sign Up - QrEntry{% endblock %}
 
 {% block content %}
-<style>
-body {
-    background: url("{% static 'images/signup-bg.png' %}") no-repeat center center fixed;
-    background-size: cover;
-    font-family: 'Inter', sans-serif; /* professional font */
-}
-
-/* Glass card */
-.glass-card {
-    background: rgba(20, 20, 20, 0.85);
-    border-radius: 20px;
-    padding: 2.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Header */
-.glass-card h2 {
-    font-size: 1.75rem;
-    letter-spacing: 0.5px;
-}
-.glass-card p {
-    font-size: 0.9rem;
-}
-
-/* Inputs */
-.glass-card .form-control,
-.glass-card .form-select {
-    background: #f8f9fa;
-    border: 1px solid #ced4da;
-    border-radius: 10px;
-    padding: 0.75rem 1rem;
-    font-size: 0.95rem;
-    transition: all 0.25s ease;
-}
-
-.glass-card .form-control:focus,
-.glass-card .form-select:focus {
-    border-color: #6a11cb;
-    box-shadow: 0 0 0 0.25rem rgba(106, 17, 203, 0.25);
-}
-
-/* Gradient button */
-.btn-gradient {
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    transition: transform 0.2s ease, opacity 0.3s ease;
-}
-.btn-gradient:hover {
-    opacity: 0.95;
-    transform: translateY(-2px);
-}
-
-/* Divider */
-.divider {
-    position: relative;
-    text-align: center;
-    color: #bbb;
-    margin: 1.5rem 0;
-}
-.divider::before,
-.divider::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 40%;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.2);
-}
-.divider::before {
-    left: 0;
-}
-.divider::after {
-    right: 0;
-}
-</style>
-
-<section class="py-3 min-vh-100 d-flex align-items-center">
+<section class="auth-shell">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-5">
-
-        <!-- Glass Effect Card -->
-        <div class="glass-card shadow-lg" data-aos="zoom-in">
-
-          <!-- Header -->
+      <div class="col-12 col-sm-10 col-md-8 col-lg-5">
+        <div class="auth-card" data-aos="zoom-in">
           <div class="text-center mb-4">
-            <h2 class="fw-bold text-white">Create Your Account</h2>
-            <p class="text-white-50">Join <span class="fw-bold text-primary">QrEntry</span> and explore amazing events</p>
+            <h2 class="auth-title">Create Your Account</h2>
+            <p class="auth-subtitle">Join <span class="fw-bold text-info">QrEntry</span> and explore amazing events.</p>
           </div>
 
-          <!-- Signup Form -->
           <form method="post" novalidate>
             {% csrf_token %}
 
             <div class="mb-3">
-              <input type="text" class="form-control" id="username" name="username" placeholder="👤 Username" required>
+              <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
             </div>
 
             <div class="mb-3">
-              <input type="email" class="form-control" id="email" name="email" placeholder="📧 Email address" required>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email address" required>
             </div>
 
             <div class="mb-3">
-              <input type="password" class="form-control" id="password" name="password" placeholder="🔒 Password" required>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
             </div>
 
             <div class="mb-4">
-              <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="🔑 Confirm Password" required>
+              <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password" required>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-4">
               <label for="role" class="form-label text-white fw-semibold">Register as</label>
               <select class="form-select" id="role" name="role" required>
-                <option value="" selected disabled>Choose...</option>
+                <option value="" selected disabled>Choose a role...</option>
                 <option value="organiser">Organiser</option>
                 <option value="participant">Participant</option>
               </select>
             </div>
 
-            <button type="submit" class="btn btn-gradient w-50 py-2 fw-bold  d-block mx-auto">Sign Up</button>
+            <button type="submit" class="btn btn-gradient w-100 py-2 fw-bold">Sign Up</button>
           </form>
 
-          <!-- Footer -->
           <div class="text-center mt-4">
             <small class="text-white-50">Already have an account?
-              <a href="{% url 'login' %}" class="text-white fw-bold">Login</a>
+              <a href="{% url 'login' %}" class="auth-inline-link">Login</a>
             </small>
           </div>
-
         </div>
-
       </div>
     </div>
   </div>

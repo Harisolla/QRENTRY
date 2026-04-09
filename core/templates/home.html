@@ -3,13 +3,10 @@
 {% block title %}Home - QrEntry{% endblock %}
 
 {% block content %}
-
-<!-- HERO SECTION -->
- 
 <section class="hero-section d-flex align-items-center justify-content-center text-white text-center">
   <div class="hero-content">
     <h1 class="display-4 fw-bold gradient-text" data-aos="fade-up">
-      Organize, Book & Check-in with Ease
+      Organize, Book and Check-in with Ease
     </h1>
     <p class="lead mb-4 px-2 px-md-5" data-aos="fade-up" data-aos-delay="200">
       Simplify event management with instant QR-based bookings and secure check-ins.
@@ -31,11 +28,7 @@
   </div>
 </section>
 
-
-
-
-<!-- ================= KEY BENEFITS ================= -->
-<div class="container text-center my-4" style="background: linear-gradient(135deg, #ffffff, #dae8fa);">
+<div class="container text-center my-4 home-benefits-section">
   <h2 class="fw-bold mt-2 py-4 mb-3" data-aos="fade-up">Why QrEntry?</h2>
   <div class="row g-4 shadow-sm p-4 rounded">
     <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="100">
@@ -64,22 +57,16 @@
   </div>
 </div>
 
-<!-- ================= FEATURE WALKTHROUGH ================= -->
-<section class="py-5" style="background: linear-gradient(to bottom, #faf2f2, #d0e5fa); width: 100vw; margin-left: calc(-50vw + 50%);">
+<section class="py-5 home-walkthrough-section">
   <div class="container">
-
-    <!-- Section Heading -->
     <div class="text-center mb-5">
       <h2 class="fw-bold display-6">Why Choose <span class="text-primary">QrEntry</span>?</h2>
       <p class="text-muted">Streamline your events with powerful tools designed for simplicity and speed.</p>
     </div>
 
-    <!-- Feature 1 -->
     <div class="row align-items-center mb-5" data-aos="fade-right">
       <div class="col-12 col-md-6 mb-3 mb-md-0 text-center">
-        <img src="https://picsum.photos/500/300?random=2" 
-             class="img-fluid rounded shadow feature-img" 
-             alt="Event Creation">
+        <img src="{% static 'images/event_creation.png' %}" class="img-fluid rounded shadow feature-img" alt="Event Creation">
       </div>
       <div class="col-12 col-md-6 text-center text-md-start">
         <h3 class="fw-bold">
@@ -90,12 +77,9 @@
       </div>
     </div>
 
-    <!-- Feature 2 -->
     <div class="row align-items-center mb-5 flex-md-row-reverse" data-aos="fade-left">
       <div class="col-12 col-md-6 mb-3 mb-md-0 text-center">
-        <img src="https://picsum.photos/500/300?random=3" 
-             class="img-fluid rounded shadow feature-img" 
-             alt="QR Check-in">
+        <img src="{% static 'images/qr_code.jpg' %}" class="img-fluid rounded shadow feature-img" alt="QR Check-in">
       </div>
       <div class="col-12 col-md-6 text-center text-md-start">
         <h3 class="fw-bold">
@@ -106,57 +90,49 @@
       </div>
     </div>
 
-    <!-- Feature 3 -->
     <div class="row align-items-center" data-aos="fade-right">
       <div class="col-12 col-md-6 mb-3 mb-md-0 text-center">
-        <img src="https://picsum.photos/500/300?random=4" 
-             class="img-fluid rounded shadow feature-img" 
-             alt="Payments">
+        <img src="{% static 'images/payment.jpg' %}" class="img-fluid rounded shadow feature-img" alt="Payments">
       </div>
       <div class="col-12 col-md-6 text-center text-md-start">
         <h3 class="fw-bold">
           <span class="badge bg-warning me-2 rounded-circle p-3"><i class="bi bi-shield-lock"></i></span>
-          Safe & Reliable Payments
+          Safe and Reliable Payments
         </h3>
         <p class="text-muted mt-3">All transactions are secured with trusted payment gateways ensuring peace of mind.</p>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ================= DYNAMIC COUNTERS ================= -->
 <div class="elementor-element e-con-full e-flex e-con e-child counters-wrapper font-poppins my-5" data-aos="fade-up">
-    <div class="counter-item">
-        <div>
-            <span class="counter-number" data-to="8">0</span><span class="plus">+</span>
-        </div>
-        <div class="counter-title">Years of Experience</div> 
+  <div class="counter-item">
+    <div>
+      <span class="counter-number" data-to="8">0</span><span class="plus">+</span>
     </div>
-    <div class="counter-item">
-        <div>
-            <span class="counter-number" data-to="1200">0</span><span class="plus">+</span>
-        </div>
-        <div class="counter-title">Events Covered</div>
+    <div class="counter-title">Years of Experience</div>
+  </div>
+  <div class="counter-item">
+    <div>
+      <span class="counter-number" data-to="1200">0</span><span class="plus">+</span>
     </div>
-    <div class="counter-item">
-        <div>
-            <span class="counter-number" data-to="950">0</span><span class="plus">+</span>
-        </div>
-        <div class="counter-title">Satisfied Clients</div>
+    <div class="counter-title">Events Covered</div>
+  </div>
+  <div class="counter-item">
+    <div>
+      <span class="counter-number" data-to="950">0</span><span class="plus">+</span>
     </div>
-    <div class="counter-item">
-        <div>
-            <span class="counter-number" data-to="4.9">0</span>
-        </div>
-        <div class="counter-title">Customer Rating</div>
+    <div class="counter-title">Satisfied Clients</div>
+  </div>
+  <div class="counter-item">
+    <div>
+      <span class="counter-number" data-to="4.9">0</span>
     </div>
+    <div class="counter-title">Customer Rating</div>
+  </div>
 </div>
 
-
-
-<!-- ================= UPCOMING EVENTS PREVIEW ================= -->
-<div class="container my-5">
+<div class="container my-5 home-upcoming-section">
   <h2 class="fw-bold text-center mb-4">Upcoming Events</h2>
   <div class="row g-4">
     {% for event in events %}
@@ -165,10 +141,10 @@
           <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.name }}">
           <div class="card-body">
             <h5 class="card-title fw-bold">{{ event.name }}</h5>
-            <p class="text-muted mb-1">{{ event.date }} • {{ event.location }}</p>
+            <p class="text-muted mb-1">{{ event.date }} | {{ event.location }}</p>
             <p class="card-text">{{ event.description|truncatewords:15 }}</p>
             <div class="d-flex justify-content-between align-items-center mt-3">
-              <span class="badge bg-success">₹{{ event.price }}</span>
+              <span class="badge bg-success">INR {{ event.price }}</span>
               <a href="{% url 'fake_payment' event.id %}" class="btn btn-primary btn-sm">Book Now</a>
             </div>
           </div>
@@ -181,18 +157,9 @@
 </div>
 
 <section class="cta-section">
-  <!-- Particle container -->
   <div class="cta-particles">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
   </div>
 
   <div class="cta-content">
@@ -202,42 +169,35 @@
   </div>
 </section>
 
-
-
 <button onclick="scrollToTop()" id="backToTopBtn" class="btn btn-primary rounded-circle shadow-lg">
-    <i class="bi bi-arrow-up"></i>
+  <i class="bi bi-arrow-up"></i>
 </button>
 
-<!-- ================= FAQ SECTION ================= -->
 <section class="py-4 faq-section font-poppins">
   <div class="container">
     <div class="text-center mb-5">
-      <h2 class="fw-bold display-6">FAQ's</h2>
+      <h2 class="fw-bold display-6">FAQs</h2>
       <p class="text-muted">Quick answers to help you get started with QrEntry</p>
     </div>
 
     <div class="accordion shadow-lg rounded" id="faqAccordion">
-      <!-- FAQ 1 -->
       <div class="accordion-item border-0 mb-3 rounded">
         <h2 class="accordion-header" id="faqOne">
-          <button class="accordion-button faq-btn" type="button" data-bs-toggle="collapse" 
-                  data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          <button class="accordion-button faq-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
             <i class="bi bi-calendar-event me-2 text-primary"></i>
             How do I create an event on QrEntry?
           </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="faqOne" data-bs-parent="#faqAccordion">
           <div class="accordion-body">
-            If you’re an organiser, log in to your account and click <strong>Create Event</strong>. Fill in the event details, upload an image, set the ticket price, and publish instantly.
+            If you're an organiser, log in to your account and click <strong>Create Event</strong>. Fill in the event details, upload an image, set the ticket price, and publish instantly.
           </div>
         </div>
       </div>
 
-      <!-- FAQ 2 -->
       <div class="accordion-item border-0 mb-3 rounded">
         <h2 class="accordion-header" id="faqTwo">
-          <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse" 
-                  data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             <i class="bi bi-qr-code-scan me-2 text-success"></i>
             How does QR check-in work?
           </button>
@@ -249,414 +209,115 @@
         </div>
       </div>
 
-      <!-- FAQ 3 -->
       <div class="accordion-item border-0 mb-3 rounded">
         <h2 class="accordion-header" id="faqThree">
-          <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse" 
-                  data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
             <i class="bi bi-credit-card-2-front me-2 text-warning"></i>
             What payment methods are supported?
           </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="faqThree" data-bs-parent="#faqAccordion">
           <div class="accordion-body">
-            QrEntry integrates secure payment gateways and supports major debit/credit cards, UPI, and net banking for smooth and safe transactions.
+            QrEntry integrates secure payment gateways and supports major debit cards, credit cards, UPI, and net banking.
           </div>
         </div>
       </div>
 
-      <!-- FAQ 4 -->
       <div class="accordion-item border-0 mb-3 rounded">
         <h2 class="accordion-header" id="faqFour">
-          <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse" 
-                  data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          <button class="accordion-button collapsed faq-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
             <i class="bi bi-arrow-repeat me-2 text-danger"></i>
             Can attendees cancel or refund tickets?
           </button>
         </h2>
         <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="faqFour" data-bs-parent="#faqAccordion">
           <div class="accordion-body">
-            Refunds and cancellations depend on the organiser’s policy. Organisers can enable or disable refunds while setting up the event.
+            Refunds and cancellations depend on the organiser's policy. Organisers can enable or disable refunds while setting up the event.
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- Scoped CSS -->
-<style>
-.hero-section {
-  width: 100vw;   /* full viewport width */
-  height: 100vh;  /* full viewport height */
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-              url("{% static 'images/hero_back.jpg' %}") left center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-left: calc(-50vw + 50%);
-}
-
-.hero-content {
-  width: 100%;
-  max-width: 1400px;  /* keep content readable */
-  padding: 0;    /* responsive padding */
-  box-sizing: border-box; /* include padding in width */
-}
-
-
-
-
-.feature-icon {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  margin: 0 auto;
-  border-radius: 6px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.feature-icon:hover {
-  transform: scale(1.15);
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
-}
-
-.feature-img {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.feature-img:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.75);
-}
-
-.hover-lift {
-  transition: transform 0.3s ease;
-}
-.hover-lift:hover {
-  transform: translateY(-5px);
-}
-
-/* Responsive text tweaks */
-@media (max-width: 768px) {
-  .hero-section h1 {
-    font-size: 2rem;
-  }
-  .hero-section p {
-    font-size: 1rem;
-  }
-}
-
-.counters-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    text-align: center;
-    gap: 0.5rem;
-}
-
-.counter-item {
-    text-align: center;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    color: rgb(61, 61, 62);
-    padding: 1rem ;
-}
-
-.counter-title {
-   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-style: normal;
-    font-weight: 400; /* normal */
-    font-size: 16px;
-    color: rgb(61, 61, 62); /* gray like in your image */
-    margin-top: 0.5rem;
-}
- .plus {
-    font-weight: 600;
-    margin-left: 2px;
-    font-size: 3rem; /* same size as number */
-    color: #000;
-}
-
-.counter-number {
-    font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-    font-weight: 300; /* semi-bold for modern look */
-    font-size: 3rem;  /* big & clean */
-    color: #000;      /* pure black like your screenshot */
-    line-height: 1.2;
-}
-
-
-
-.card img {
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-.card:hover img {
-  filter: brightness(0.65);
-}
-
-#backToTopBtn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    display: none; /* hidden by default */
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-    z-index: 999;
-    transition: opacity 0.5s ease-in-out, transform 0.5s;
-}
-#backToTopBtn:hover {
-    transform: scale(1.1);
-}
-/* CTA Section */
-.cta-section {
-  width: 100vw;
-  height: auto;
-  padding: 50px 20px;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(270deg, #90aaff, #398ff3, #667eea, #764ba2);
-  /* -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent; */
-    animation: gradientShift 10s ease infinite;
-  color: #fff;
-  margin-left: calc(-50vw + 50%);
-}
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-
-/* Glassmorphism content card */
-.cta-content {
-  position: relative;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 30px 10px;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-  text-align: center;
-  z-index: 2;
-}
-
-/* Heading & text */
-.cta-content h2 {
-  font: poppins;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.cta-content p {
-  font-size: 1.15rem;
-  color: rgba(255,255,255,0.85);
-  margin-bottom: 30px;
-}
-
-/* Button */
-.cta-content .btn {
-  border-radius: 50px;
-  padding: 15px 35px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  background: #fff;
-  color: #224abe;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  transition: all 0.35s ease-in-out;
-}
-
-.cta-content .btn:hover {
-  background: #f1f5ff;
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
-}
-
-/* Particle container */
-.cta-particles span {
-  position: absolute;
-  display: block;
-  width: 10px;
-  height: 10px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 50%;
-  
-  /* Neon glow */
-  box-shadow: 0 0 10px rgba(255,255,255,0.4),
-              0 0 20px rgba(255,255,255,0.3),
-              0 0 30px rgba(255,255,255,0.2);
-
-  animation: floatGlow 15s linear infinite;
-  top: 50%;
-  left: 50%;
-}
-
-/* Random positions & delays */
-.cta-particles span:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
-.cta-particles span:nth-child(2) { left: 80%; top: 15%; animation-delay: 2s; }
-.cta-particles span:nth-child(3) { left: 30%; top: 70%; animation-delay: 4s; }
-.cta-particles span:nth-child(4) { left: 60%; top: 60%; animation-delay: 1s; }
-.cta-particles span:nth-child(5) { left: 50%; top: 30%; animation-delay: 3s; }
-.cta-particles span:nth-child(6) { left: 25%; top: 40%; animation-delay: 5s; }
-.cta-particles span:nth-child(7) { left: 75%; top: 50%; animation-delay: 6s; }
-.cta-particles span:nth-child(8) { left: 15%; top: 80%; animation-delay: 2.5s; }
-.cta-particles span:nth-child(9) { left: 85%; top: 70%; animation-delay: 4.5s; }
-.cta-particles span:nth-child(10){ left: 40%; top: 85%; animation-delay: 1.5s; }
-.cta-particles span:nth-child(11){ left: 60%; top: 85%; animation-delay: 1.5s; }
-.cta-particles span:nth-child(12){ left: 20%; top: 90%; animation-delay: 3.5s; }
-.cta-particles span:nth-child(13) { left: 90%; top: 70%; animation-delay: 1s; }
-
-/* Floating + glowing animation */
-@keyframes floatGlow {
-  0% { transform: translate(0, 0) scale(1); opacity: 0.3; box-shadow: 0 0 10px rgba(255,255,255,0.4); }
-  25% { transform: translate(20px, -30px) scale(1.2); opacity: 0.5; box-shadow: 0 0 15px rgba(255,255,255,0.5); }
-  50% { transform: translate(-15px, 50px) scale(1); opacity: 0.35; box-shadow: 0 0 12px rgba(255,255,255,0.45); }
-  75% { transform: translate(10px, -40px) scale(1.1); opacity: 0.55; box-shadow: 0 0 18px rgba(255,255,255,0.5); }
-  100% { transform: translate(0, 0) scale(1); opacity: 0.3; box-shadow: 0 0 10px rgba(255,255,255,0.4); }
-}
-
-
-
-.faq-section {
-  /* background: linear-gradient(135deg, #f9fbff, #eef5ff); */
-   width: 100vw;
-   margin-left: calc(-50vw + 50%);
-}
-
-.accordion {
-  max-width: 500px;
-  margin: 0 auto;
-  
-  
-}
-
-.faq-btn {
-  font-weight: 500;
-  font-size: 1.05rem;
-  border-radius: 0.75rem;
-  background: #fff;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-.faq-btn:not(.collapsed) {
-  background: linear-gradient(135deg, #4e73df, #92e7ff);
-  color: #fff;
-  box-shadow: 0 6px 18px rgba(0, 123, 255, 0.25);
-}
-
-.faq-btn.collapsed:hover {
-  background: #f1f5ff;
-  transform: translateY(-2px);
-}
-
-.accordion-body {
-  background: #fff;
-  border-radius: 0.75rem;
-  padding: 1.2rem;
-  font-size: 0.95rem;
-  color: #555;
-  box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
-}
-
-
-</style>
 <script>
-// Show button when user scrolls down
 window.onscroll = function () {
-    const btn = document.getElementById("backToTopBtn");
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        btn.style.display = "flex";
-    } else {
-        btn.style.display = "none";
-    }
+  const btn = document.getElementById("backToTopBtn");
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    btn.style.display = "flex";
+  } else {
+    btn.style.display = "none";
+  }
 };
 
-// Smooth scroll to top
 function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 </script>
 
-<!-- JS for counter animation -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const counters = document.querySelectorAll(".counter-number");
+  const counters = document.querySelectorAll(".counter-number");
 
-    counters.forEach(counter => {
-        const target = parseFloat(counter.getAttribute("data-to"));
-        const duration = 2000; // animation duration in ms
-        const frameRate = 60; // frames per second
-        const totalFrames = Math.round((duration / 1000) * frameRate);
-        let frame = 0;
+  counters.forEach(counter => {
+    const target = parseFloat(counter.getAttribute("data-to"));
+    const duration = 2000;
+    const frameRate = 60;
+    const totalFrames = Math.round((duration / 1000) * frameRate);
+    let frame = 0;
 
-        const countUp = () => {
-            frame++;
-            const progress = frame / totalFrames;
-            const current = target * progress;
-            // Show 1 decimal for fractional numbers like rating
-            if (target % 1 !== 0) {
-                counter.textContent = current.toFixed(1);
-            } else {
-                counter.textContent = Math.round(current);
-            }
-            if (frame < totalFrames) {
-                requestAnimationFrame(countUp);
-            } else {
-                counter.textContent = target; // ensure exact final value
-            }
-        };
+    const countUp = () => {
+      frame++;
+      const progress = frame / totalFrames;
+      const current = target * progress;
+      if (target % 1 !== 0) {
+        counter.textContent = current.toFixed(1);
+      } else {
+        counter.textContent = Math.round(current);
+      }
+      if (frame < totalFrames) {
+        requestAnimationFrame(countUp);
+      } else {
+        counter.textContent = target;
+      }
+    };
 
-        // Start counting when counter enters viewport
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    countUp();
-                    observer.unobserve(counter);
-                }
-            });
-        }, { threshold: 0.5 });
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          countUp();
+          observer.unobserve(counter);
+        }
+      });
+    }, { threshold: 0.5 });
 
-        observer.observe(counter);
-    });
+    observer.observe(counter);
+  });
 });
 </script>
 
-
-
 <script>
-window.addEventListener('load', () => {
-  const hero = document.querySelector('.hero-section');
-  const alerts = document.querySelectorAll('.alert');
-  const badge = document.getElementById('helloBadge');
+window.addEventListener("load", () => {
+  const hero = document.querySelector(".hero-section");
+  const alerts = document.querySelectorAll(".alert");
+  const badge = document.getElementById("helloBadge");
 
-  // Wait for alerts and badge to disappear
-  const waitTime = 3000; // same as your auto-dismiss time
+  const waitTime = 3000;
   setTimeout(() => {
     let totalHeight = 0;
 
     alerts.forEach(alert => {
-      totalHeight += alert.offsetHeight + 16; // add some margin if needed
+      totalHeight += alert.offsetHeight + 16;
     });
 
     if (badge) totalHeight += badge.offsetHeight + 16;
 
-    if(hero) {
-      hero.style.transition = 'margin-top 0.5s ease'; // smooth transition
+    if (hero) {
+      hero.style.transition = "margin-top 0.5s ease";
       hero.style.marginTop = `-${totalHeight}px`;
     }
   }, waitTime);
 });
 </script>
-
-
 
 {% endblock %}
