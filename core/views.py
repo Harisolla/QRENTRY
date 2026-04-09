@@ -177,7 +177,9 @@ def signup_view(request):
             user.set_password(form.cleaned_data['password'])
             user.save()
 
-            Profile.objects.create(user=user, role=role)
+            profile, _ = Profile.objects.get_or_create(user=user)
+            profile.role = role
+            profile.save()
             messages.success(request, "Signup successful!")
             return redirect('login')
         else:
