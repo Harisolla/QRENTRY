@@ -246,3 +246,58 @@ This project is designed to be **deployment-ready** with support for:
 
 
 
+# QrEntry
+
+Current setup summary for this repository:
+
+- Django app with local SQLite support
+- `.env`-based local configuration
+- Render deployment via `render.yaml`
+- Gunicorn + WhiteNoise for production
+
+## Run Locally
+
+1. `pip install -r requirements.txt`
+2. `python manage.py migrate`
+3. `python manage.py createadmin`
+4. `python manage.py runserver`
+
+Open `http://127.0.0.1:8000`
+
+Default local admin:
+- Username: `admin`
+- Password: `admin123`
+
+## Main Environment Variables
+
+- `SECRET_KEY`
+- `DEBUG`
+- `ALLOWED_HOSTS`
+- `CSRF_TRUSTED_ORIGINS`
+- `DATABASE_URL`
+- `DJANGO_SUPERUSER_USERNAME`
+- `DJANGO_SUPERUSER_EMAIL`
+- `DJANGO_SUPERUSER_PASSWORD`
+
+See `.env.example` for local defaults.
+
+## Deploy On Render
+
+This repo includes:
+
+- `render.yaml`
+- `build.sh`
+
+Render steps:
+
+1. Create a new Blueprint in Render from this GitHub repo.
+2. Let Render create the web service and database from `render.yaml`.
+3. Set:
+   - `ALLOWED_HOSTS=your-app-name.onrender.com`
+   - `CSRF_TRUSTED_ORIGINS=https://your-app-name.onrender.com`
+4. Deploy.
+
+Start command:
+- `gunicorn event_system.wsgi --bind 0.0.0.0:$PORT`
+
+Note: older notes below may be outdated compared with the current Django setup.
