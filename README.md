@@ -1,303 +1,191 @@
-# Event Ticket Booking & Attendance Management System  
-
-> A full-stack web application that allows users to browse events, book tickets securely, and enables real-time QR-based attendance tracking for organizers.
-
- Built with **Django, MySQL, and React**, this project demonstrates real-world full-stack development, authentication, payment readiness, and real-time data handling.
-
----
-
-##  Why This Project Stands Out
-
-✅ Real-world **production-grade use case**  
-✅ **End-to-end full-stack implementation**  
-✅ **Secure authentication & authorization**  
-✅ **QR-code based check-in system**  
-✅ **Admin dashboard for organizers**  
-✅ Designed with **scalability & performance in mind**
-
-This is not just a CRUD app — it’s a **complete event-tech platform**.
-
----
-
-##  Key Features
-
-###  User Side
-- Event browsing with detailed descriptions  
-- Secure user authentication & authorization  
-- Ticket booking system  
-- Booking history & ticket management  
-- QR code generation for each ticket  
-
-###  Organizer / Admin Side
-- Event creation & management  
-- Real-time attendance tracking using QR scans  
-- Dashboard with booking & attendance analytics  
-- Duplicate entry prevention  
-
-###  Security
-- Password hashing  
-- Auth-protected routes  
-- Role-based access control  
-
----
-
-##  Tech Stack
-
-### Backend
-- **Django (Python)**
-- **MySQL**
-- Django REST Framework
-- JWT Authentication
-
-### Frontend
-- **React.js**
-- Axios
-- CSS / Tailwind
-
-### Tools & Platforms
-- Git & GitHub  
-- VS Code  
-- Postman (API testing)  
-
----
-
-##  System Architecture
-
-This project follows a **modern 3-tier full-stack architecture** ensuring scalability, security, and clean separation of concerns.
-
-
-**Frontend Layer**
-- Built using React.js  
-- Handles UI, user interaction, and API calls  
-
-**Backend Layer**
-- Built using Django REST Framework  
-- Handles authentication, business logic, ticket booking, QR validation, and attendance tracking  
-
-**Database Layer**
-- MySQL database  
-- Stores users, events, bookings, and attendance records  
-
-###  Data Flow
-
-User → React Frontend → Django REST API → MySQL Database  
-MySQL Database → Django REST API → React Frontend → User
-
-
----
-
-##  Backend Architecture (Django)
-
-The backend is built using **Django + Django REST Framework (DRF)** following a **modular app-based architecture**.
-
-###  Core Django Apps
-
-| App Name | Responsibility |
-|----------|----------------|
-| `users` | User registration, login, JWT auth, roles |
-| `events` | Event creation, listing, filtering |
-| `bookings` | Ticket booking, history, QR generation |
-| `attendance` | QR validation & real-time attendance |
-| `adminpanel` | Organizer dashboard & analytics |
-
-Each app contains:
-- `models.py` → Database schema  
-- `serializers.py` → API data validation  
-- `views.py` → Business logic  
-- `urls.py` → API routing  
-
----
-
-##  Authentication & Authorization Flow (JWT)
-
-1. User registers or logs in
-2. Django validates credentials
-3. Server issues a **JWT Token**
-4. Token is stored in browser (localStorage)
-5. Django middleware verifies:
-- Token validity
-- User role (admin or user)
-6. Unauthorized users are blocked automatically
-
-✅ Protects against:
-- Route tampering
-- Unauthorized bookings
-- Admin privilege abuse
-
----
-
-##  Database Design (Relational Mapping)
-
-### 🔹 Core Tables
-
-| Table | Description |
-|--------|-------------|
-| `users` | Stores login credentials & roles |
-| `events` | Stores event info (date, price, capacity) |
-| `bookings` | Stores booked tickets |
-| `attendance` | Stores QR scan & check-in logs |
-
----
-
-##  Ticket Booking Flow (Full Internal Logic)
-
-1. User selects an event from frontend
-2. React sends `POST /api/book-ticket/`
-3. Django checks:
-   - User is authenticated
-   - Event capacity is not exceeded
-   - Duplicate booking prevention
-4. Ticket is created in `bookings` table
-5. Unique **QR Code is generated**
-6. QR is linked with:
-   - User ID
-   - Event ID
-   - Booking ID
-7. QR image is returned to frontend
-
-✅ Prevents:
-- Duplicate bookings
-- Over-booking
-- Unauthorized bookings
-
----
-
-##  QR Code Validation Flow (Real-Time Attendance)
-
-1. Admin scans QR at event entry
-2. Frontend sends scanned QR data to:POST /api/attendance/validate/
-3. Django verifies:
-- QR belongs to valid booking
-- Booking is not already used
-- Event is currently active
-4. If valid:
-- Attendance is marked ✅
-- Entry allowed
-5. If invalid:
-- Entry rejected 
-- Reason returned (duplicate, expired, fake)
-
-✅ This ensures:
-- No duplicate entry
-- No fake ticket entry
-- Real-time live attendance tracking
-
----
-
-##  Organizer Dashboard Logic
-
-The admin panel dynamically fetches:
-
-- Total tickets sold
-- Live attendance count
-- No-show users
-- Event revenue summary
-
-All data is fetched using:GET /api/admin/analytics/
-
-
-Aggregations are optimized using:
-- Django ORM annotations
-- Database indexing on foreign keys
-
----
-
-##  Performance & Scalability Handling
-
-- ✅ Pagination for event listings
-- ✅ Indexed foreign keys for fast lookups
-- ✅ Token-based stateless authentication
-- ✅ Optimized QR validation queries
-- ✅ Separation of concerns via app-based Django design
-
----
-
-##  Security Measures Implemented
-
-- Password hashing using Django’s built-in hashers
-- JWT token expiration handling
-- Input sanitization via serializers
-- Role-based access control
-- CSRF-safe API design
-
----
-
-##  Production Readiness
-
-This project is designed to be **deployment-ready** with support for:
-- Cloud hosting (AWS / Railway / DigitalOcean)
-- Persistent MySQL storage
-- React production build
-- Secure environment variables
-
----
-
-##  Engineering Highlights
-
-✅ Real-time QR-based attendance  
-✅ Stateless JWT authentication  
-✅ Clean backend architecture  
-✅ Fully relational database design  
-✅ Scalable REST APIs  
-✅ Production-level system behavior  
-
----
-
-
-
-
 # QrEntry
 
-Current setup summary for this repository:
+QrEntry is a Django-based event ticket booking and attendance management system. Users can browse events, book tickets, receive QR-backed confirmations, and download ticket PDFs. Organizers can create events, review bookings, and scan tickets at entry.
 
-- Django app with local SQLite support
-- `.env`-based local configuration
-- Render deployment via `render.yaml`
-- Gunicorn + WhiteNoise for production
+## Live Website
 
-## Run Locally
+Website: [https://qrentry-1-4yfa.onrender.com/](https://qrentry-1-4yfa.onrender.com/)
 
-1. `pip install -r requirements.txt`
-2. `python manage.py migrate`
-3. `python manage.py createadmin`
-4. `python manage.py runserver`
+Note: this URL is inferred from the Render service name in `render.yaml`. If your deployed app uses a different hostname, update this link.
 
-Open `http://127.0.0.1:8000`
+## Features
 
-Default local admin:
-- Username: `admin`
-- Password: `admin123`
+- User signup and login with role selection for `participant` or `organiser`
+- Google login support through `django-allauth`
+- Event creation with image upload, date, location, price, and capacity
+- Event discovery with search, date filters, price filter, and pagination
+- Ticket booking flow with generated ticket IDs and QR codes
+- Organizer booking view and QR-based attendance scanning
+- Ticket PDF download using ReportLab
+- Email-ready booking flow with console email backend by default
+- Admin panel through Django admin
 
-## Main Environment Variables
+## Tech Stack
+
+- Backend: Django 5
+- Database: SQLite for local development, `DATABASE_URL` support for production databases
+- Authentication: Django auth + `django-allauth`
+- Media and static files: WhiteNoise, uploaded event images, generated QR assets
+- PDF generation: ReportLab
+- QR generation: `qrcode` + Pillow
+- Deployment: Render + Gunicorn
+
+## Project Structure
+
+```text
+QrEntry-main/
+|-- core/                 # Models, views, forms, templates, QR logic
+|-- event_system/         # Django settings, URLs, WSGI/ASGI
+|-- static/               # Static assets
+|-- media/                # Uploaded images and generated files
+|-- build.sh              # Render build script
+|-- render.yaml           # Render blueprint
+|-- manage.py
+|-- requirements.txt
+```
+
+## Core Models
+
+- `Profile`: links a Django user to a role (`organiser` or `participant`)
+- `Event`: stores event details including capacity, price, and optional image
+- `Booking`: stores the booked event, ticket ID, status, and QR file path
+- `Payment`: stores simulated payment records
+- `CheckinLog`: stores check-in activity
+
+## Main Routes
+
+### Pages
+
+- `/` home page
+- `/events/` event listing
+- `/events/<id>/` event detail
+- `/bookings/` participant bookings
+- `/events/create/` organizer event creation
+- `/organizer/bookings/` organizer booking dashboard
+- `/scan/` attendance scan page
+- `/scan-qr/` camera QR scanner
+- `/login/`, `/signup/`, `/logout/`
+- `/password-reset/` and related reset flows
+
+### JSON and utility endpoints
+
+- `/api/events/` list events
+- `/api/events/<id>/` event details
+- `/api/book/<event_id>/` create booking
+- `/api/qr/<booking_id>/` download QR image
+- `/api/payment-webhook/` simulated payment webhook
+- `/download-pdf/<booking_id>/` download ticket PDF
+
+## Local Setup
+
+### 1. Create and activate a virtual environment
+
+On Windows PowerShell:
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
+
+### 2. Install dependencies
+
+```powershell
+pip install -r requirements.txt
+```
+
+### 3. Configure environment variables
+
+Copy `.env.example` to `.env` and adjust values as needed.
+
+Important variables:
 
 - `SECRET_KEY`
 - `DEBUG`
 - `ALLOWED_HOSTS`
 - `CSRF_TRUSTED_ORIGINS`
 - `DATABASE_URL`
+- `EMAIL_BACKEND`
+- `EMAIL_HOST`
+- `EMAIL_PORT`
+- `EMAIL_USE_TLS`
+- `EMAIL_HOST_USER`
+- `EMAIL_HOST_PASSWORD`
 - `DJANGO_SUPERUSER_USERNAME`
 - `DJANGO_SUPERUSER_EMAIL`
 - `DJANGO_SUPERUSER_PASSWORD`
 
-See `.env.example` for local defaults.
+Default local database:
 
-## Deploy On Render
+```env
+DATABASE_URL=sqlite:///db.sqlite3
+```
 
-This repo includes:
+### 4. Run migrations
+
+```powershell
+python manage.py migrate
+```
+
+### 5. Create an admin user
+
+```powershell
+python manage.py createadmin
+```
+
+Default fallback credentials used by the custom management command:
+
+- Username: `admin`
+- Password: `admin123`
+
+### 6. Start the development server
+
+```powershell
+python manage.py runserver
+```
+
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+## Email Behavior
+
+The project uses Django's console email backend by default, which means booking and password reset emails are printed to the terminal in local development.
+
+To send real emails, configure SMTP values in `.env`.
+
+## Deployment on Render
+
+This repository already includes:
 
 - `render.yaml`
 - `build.sh`
 
-Render steps:
+`build.sh` runs:
 
-1. Create a new Blueprint in Render from this GitHub repo.
-2. Let Render create the web service and database from `render.yaml`.
-3. Set:
-   - `ALLOWED_HOSTS=your-app-name.onrender.com`
-   - `CSRF_TRUSTED_ORIGINS=https://your-app-name.onrender.com`
-4. Deploy.
+```bash
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py collectstatic --noinput
+```
 
-Start command:
-- `gunicorn event_system.wsgi --bind 0.0.0.0:$PORT`
+### Render steps
 
-Note: older notes below may be outdated compared with the current Django setup.
+1. Create a new Blueprint service on Render from this GitHub repository.
+2. Let Render provision the web service and database defined in `render.yaml`.
+3. Set the correct production values for:
+   - `ALLOWED_HOSTS`
+   - `CSRF_TRUSTED_ORIGINS`
+   - `SECRET_KEY`
+   - email variables if you want live email delivery
+4. Deploy the service.
+
+Production start command:
+
+```bash
+gunicorn event_system.wsgi --bind 0.0.0.0:$PORT
+```
+
+## Notes
+
+- The app is server-rendered with Django templates. It does not use React in the current codebase.
+- Local development uses SQLite by default, not MySQL.
+- Payment handling in this repository is simulated for development and demo purposes.
+- Static files are served with WhiteNoise, and uploaded/generated media is stored under `media/`.
